@@ -1,5 +1,6 @@
 package co.edu.umanizales.rent.service;
 
+import co.edu.umanizales.rent.model.ResponseFilter;
 import co.edu.umanizales.rent.model.Vehicle;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,6 @@ public class RentService {
         vehicles = new ArrayList<>();
         vehicles.add(new Vehicle("ABC123", "Car", "Red", true));
         vehicles.add(new Vehicle("XYZ987", "Motorcycle", "Blue", true));
-        vehicles.add(new Vehicle("LMN456", "Van", "Red", true));
     }
 
     public List<Vehicle> getAllVehicles() {
@@ -37,19 +37,23 @@ public class RentService {
         return false;
     }
 
-    public Map<String, Integer> filterVehiclesByColor(String color) {
+    public List<ResponseFilter> filterVehiclesByColor(String color) {
         Map<String, Integer> colorCount = new HashMap<>();
         colorCount.put("Car", 0);
         colorCount.put("Motorcycle", 0);
-        colorCount.put("Van", 0);
 
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getColor().equalsIgnoreCase(color)) {
-                int currentCount = colorCount.getOrDefault(vehicle.getType(), 0);
+                int currentCount = colorCount.get(vehicle.getType());
                 colorCount.put(vehicle.getType(), currentCount + 1);
             }
         }
 
-        return colorCount;
+        List<ResponseFilter> filters = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : colorCount.entrySet()) {
+            filters.add(new ResponseFilter(entry.getKey(), entry.getValue()));
+        }
+
+        return filters;
     }
 }

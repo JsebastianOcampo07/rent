@@ -1,19 +1,15 @@
 package co.edu.umanizales.rent.model;
 
-import co.edu.umanizales.rent.menu.VehicleType;
-
 public class Vehicle {
     private String plateNumber;
-    private String type; // "Car", "Moto", etc.
+    private String type;
     private String color;
-    private VehicleType vehicleType;
     private boolean available;
 
-    public Vehicle(String plateNumber, String type, String color, VehicleType vehicleType, boolean available) {
+    public Vehicle(String plateNumber, String type, String color, boolean available) {
         this.plateNumber = plateNumber;
         this.type = type;
         this.color = color;
-        this.vehicleType = vehicleType;
         this.available = available;
     }
 
@@ -41,14 +37,6 @@ public class Vehicle {
         this.color = color;
     }
 
-    public VehicleType getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(VehicleType vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
     public boolean isAvailable() {
         return available;
     }
@@ -57,5 +45,3 @@ public class Vehicle {
         this.available = available;
     }
 }
-
-

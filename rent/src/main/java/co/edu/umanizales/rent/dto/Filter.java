@@ -1,21 +1,19 @@
-package co.edu.umanizales.rent.dto;
-
-import co.edu.umanizales.rent.dto.RentVehicle;
+package co.edu.umanizales.rent.model;
 
 public class ResponseFilter {
-    private VehicleType type;
+    private String type;
     private int count;
 
-    public ResponseFilter(VehicleType type, int count) {
+    public ResponseFilter(String type, int count) {
         this.type = type;
         this.count = count;
     }
 
-    public VehicleType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(VehicleType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
