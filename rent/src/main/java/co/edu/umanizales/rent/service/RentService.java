@@ -1,23 +1,20 @@
 package co.edu.umanizales.rent.service;
 
-import co.edu.umanizales.rent.model.ResponseFilter;
+import co.edu.umanizales.rent.dto.ResponseFilter;
 import co.edu.umanizales.rent.model.Vehicle;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class RentService {
-    private List<Vehicle> vehicles;
+    private final List<Vehicle> vehicles = new ArrayList<>();
 
     public RentService() {
-        vehicles = new ArrayList<>();
-        vehicles.add(new Vehicle("ABC123", "Car", "Red", true));
-        vehicles.add(new Vehicle("XYZ987", "Motorcycle", "Blue", true));
+        vehicles.add(new Vehicle("ABC123", "Car", true, "Red"));
+        vehicles.add(new Vehicle("XYZ987", "Motorcycle", true, "Blue"));
     }
 
     public List<Vehicle> getAllVehicles() {
@@ -37,23 +34,21 @@ public class RentService {
         return false;
     }
 
-    public List<ResponseFilter> filterVehiclesByColor(String color) {
-        Map<String, Integer> colorCount = new HashMap<>();
-        colorCount.put("Car", 0);
-        colorCount.put("Motorcycle", 0);
-
+    public List<ResponseFilter> filterByColor(String color) {
+        int carCount = 0, motorcycleCount = 0;
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getColor().equalsIgnoreCase(color)) {
-                int currentCount = colorCount.get(vehicle.getType());
-                colorCount.put(vehicle.getType(), currentCount + 1);
+                if ("Car".equalsIgnoreCase(vehicle.getType())) {
+                    carCount++;
+                } else if ("Motorcycle".equalsIgnoreCase(vehicle.getType())) {
+                    motorcycleCount++;
+                }
             }
         }
-
         List<ResponseFilter> filters = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : colorCount.entrySet()) {
-            filters.add(new ResponseFilter(entry.getKey(), entry.getValue()));
-        }
-
+        filters.add(new ResponseFilter("Car", carCount));
+        filters.add(new ResponseFilter("Motorcycle", motorcycleCount));
         return filters;
     }
 }
+

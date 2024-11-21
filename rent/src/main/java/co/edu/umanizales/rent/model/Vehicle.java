@@ -3,14 +3,14 @@ package co.edu.umanizales.rent.model;
 public class Vehicle {
     private String plateNumber;
     private String type;
-    private String color;
     private boolean available;
+    private String color;
 
-    public Vehicle(String plateNumber, String type, String color, boolean available) {
+    public Vehicle(String plateNumber, String type, boolean available, String color) {
         this.plateNumber = plateNumber;
         this.type = type;
-        this.color = color;
         this.available = available;
+        this.color = color;
     }
 
     public String getPlateNumber() {
@@ -29,19 +29,19 @@ public class Vehicle {
         this.type = type;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public boolean isAvailable() {
         return available;
     }
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
