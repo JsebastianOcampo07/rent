@@ -51,4 +51,3 @@ public class RentService {
         return filters;
     }
 }
-
